@@ -473,7 +473,7 @@ class PlanSubscription extends Model
             } elseif ($usage->expired()) {
                 // If the usage record has been expired, let's assign
                 // a new expiration date and reset the uses to zero.
-                $usage->valid_until = $feature->getResetDate($usage->valid_until);
+                $usage->valid_until = $feature->getResetDate(now());
                 $usage->used = 0;
             }
         }
