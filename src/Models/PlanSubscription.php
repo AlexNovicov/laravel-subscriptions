@@ -451,11 +451,11 @@ class PlanSubscription extends Model
             if (is_null($usage->valid_until)) {
                 // Set date from subscription creation date so the reset
                 // period match the period specified by the subscription's plan.
-                $usage->valid_until = $feature->getResetDate($this->created_at);
+                $usage->valid_until = $feature->getResetDate(now()->startOfDay());
             } elseif ($usage->expired()) {
                 // If the usage record has been expired, let's assign
                 // a new expiration date and reset the uses to zero.
-                $usage->valid_until = $feature->getResetDate(now());
+                $usage->valid_until = $feature->getResetDate(now()->startOfDay());
                 $usage->used = 0;
             }
         }
