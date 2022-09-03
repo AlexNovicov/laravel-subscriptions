@@ -49,10 +49,6 @@
     {
       "type": "github",
       "url":  "https://github.com/AlexNovicov/laravel-support"
-    },
-    {
-      "type": "vcs",
-      "url": "https://github.com/laravel-shift/uniquewith-validator.git"
     }
   ]
 }
