@@ -43,10 +43,10 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-  "repositories": [
-    {
-      "type": "github",
-      "url":  "https://github.com/AlexNovicov/laravel-support"
-    }
-  ]
+    "repositories": [
+      {
+        "type": "github",
+        "url":  "https://github.com/alexnovicov/laravel-support"
+      }
+    ]
 }
