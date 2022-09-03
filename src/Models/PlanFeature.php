@@ -191,13 +191,13 @@ class PlanFeature extends Model implements Sortable
     /**
      * Get feature's reset date.
      *
-     * @param string $dateFrom
+     * @param Carbon $dateFrom
      *
      * @return \Carbon\Carbon
      */
     public function getResetDate(Carbon $dateFrom): Carbon
     {
-        $period = new Period($this->resettable_interval, $this->resettable_period, $dateFrom ?? now());
+        $period = new Period($this->resettable_interval, $this->resettable_period, $dateFrom);
 
         return $period->getEndDate();
     }

@@ -33,6 +33,7 @@ trait HasPlanSubscriptions
      */
     protected static function bootHasSubscriptions()
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         static::deleted(function ($plan) {
             $plan->planSubscriptions()->delete();
         });
@@ -67,6 +68,7 @@ trait HasPlanSubscriptions
      */
     public function planSubscription(string $subscriptionSlug): ?PlanSubscription
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->planSubscriptions()->where('slug', $subscriptionSlug)->first();
     }
 

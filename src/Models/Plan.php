@@ -251,7 +251,7 @@ class Plan extends Model implements Sortable
      */
     public function isFree(): bool
     {
-        return (float) $this->price <= 0.00;
+        return $this->price <= 0.00;
     }
 
     /**
@@ -283,6 +283,7 @@ class Plan extends Model implements Sortable
      */
     public function getFeatureBySlug(string $featureSlug): ?PlanFeature
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->features()->where('slug', $featureSlug)->first();
     }
 

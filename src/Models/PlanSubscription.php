@@ -243,7 +243,7 @@ class PlanSubscription extends Model
      */
     public function onTrial(): bool
     {
-        return $this->trial_ends_at ? Carbon::now()->lt($this->trial_ends_at) : false;
+        return $this->trial_ends_at && Carbon::now()->lt($this->trial_ends_at);
     }
 
     /**
@@ -253,7 +253,7 @@ class PlanSubscription extends Model
      */
     public function canceled(): bool
     {
-        return $this->canceled_at ? Carbon::now()->gte($this->canceled_at) : false;
+        return $this->canceled_at && Carbon::now()->gte($this->canceled_at);
     }
 
     /**
@@ -263,7 +263,7 @@ class PlanSubscription extends Model
      */
     public function ended(): bool
     {
-        return $this->ends_at ? Carbon::now()->gte($this->ends_at) : false;
+        return $this->ends_at && Carbon::now()->gte($this->ends_at);
     }
 
     /**
@@ -451,14 +451,15 @@ class PlanSubscription extends Model
      * Record feature usage.
      *
      * @param string $featureSlug
-     * @param int    $uses
-     *
-     * @return \Rinvex\Subscriptions\Models\PlanSubscriptionUsage
+     * @param int $uses
+     * @param bool $incremental
+     * @return PlanSubscriptionUsage
      */
     public function recordFeatureUsage(string $featureSlug, int $uses = 1, bool $incremental = true): PlanSubscriptionUsage
     {
         $feature = $this->plan->features()->where('slug', $featureSlug)->first();
 
+        /** @var PlanSubscriptionUsage $usage */
         $usage = $this->usage()->firstOrNew([
             'subscription_id' => $this->getKey(),
             'feature_id' => $feature->getKey(),
